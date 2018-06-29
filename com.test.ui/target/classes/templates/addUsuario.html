@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width" />
+	<title>Cadastros de Usuários</title>
+	<link href="../static/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"></link>
+	<script src="../static/jquery/3.3.1/jquery.min.js"></script>
+	<script src="../static/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<strong>Cadastros de Usuários</strong>
+		</div>
+		<div class="panel-body">
+			<form class="form-horizontal" th:object="${usuario}" th:action="@{/salvar}" method="POST" style="margin: 10px">
+				<div class="form-group">
+ 					<fieldset>
+						<div class="form-group row">
+							<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+								<div th:each="detailedError : ${#fields.detailedErrors()}">
+									<span th:text="${detailedError.message}"></span>
+								</div>
+							</div>
+						</div> 					
+						<div class="form-group row">
+						    <div class="col-md-1">
+						        <input type="text" class="form-control input-sm" id="id" th:field="*{id}" readOnly="readonly"/>
+						    </div>
+						 </div>
+						<div class="form-group row">                                                          
+							<div class="col-md-4" th:classappend="${#fields.hasErrors('nome')}? 'has-error'">
+							    <label>Nome</label>
+							    <input type="text" class="form-control input-sm" th:field="*{nome}" autofocus="autofocus" placeholder="Informe o nome" maxlength="50"/>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-md-4" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+								<label>Email</label> 
+								<input type="text" class="form-control input-sm" th:field="*{email}" maxlength="150" placeholder="Informe o email"/>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-md-4" th:classappend="${#fields.hasErrors('telefone')}? 'has-error'">
+								<label>Telefone</label> 
+								<input type="text" class="form-control input-sm" th:field="*{telefone}" maxlength="150" placeholder="Informe o telefone"/>
+							</div>
+						</div>					
+						<div class="form-group">
+							<div class="col-md-4">
+							<label for="sel1">Selecione o sexo:</label>
+								 <select class="form-control" id="sel1">
+        							<option>Masculino</option>
+        							<option>Feminino</option>
+      							</select>
+							</div>
+						</div>						
+					</fieldset>
+				</div>
+				<div class="form-group row">
+					<button type="submit" class="btn btn-sm btn-primary">Salvar</button>
+					<a th:href="@{usuario}" href="usuario.html" class="btn btn-sm btn-default">Cancelar</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
